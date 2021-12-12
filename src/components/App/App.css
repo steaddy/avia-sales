@@ -23,6 +23,7 @@ h3 {
   display: flex;
   margin: auto;
   height: content-box;
+  justify-content: center;
 }
 
 label, button {
