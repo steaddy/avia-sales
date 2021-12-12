@@ -1,0 +1,62 @@
+.ticket {
+  font-family: Open Sans;
+  width: 462px;
+  height: 144px;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.fly {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.ticket__header {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  color: #A0B0B9;
+}
+
+.ticket__content {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+
+  display: flex;
+  align-items: center;
+
+  color: #4A4A4A;
+
+}
+
+.ticket__price {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+
+
+  color: #2196F3;
+}

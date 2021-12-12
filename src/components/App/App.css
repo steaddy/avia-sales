@@ -1,0 +1,39 @@
+html, body, #root {
+  height: 100%;
+}
+.main-container {
+  background: #F3F7FA;
+  width: 960px;
+  margin: auto;
+  min-height: 100%;
+}
+
+h3 {
+  font-family: Open Sans, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #4A4A4A;
+}
+
+.main-content {
+  display: flex;
+  margin: auto;
+  height: content-box;
+}
+
+label, button {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 20px;
+  color: #4A4A4A;
+}
+
+button {
+  text-transform: uppercase;
+}
