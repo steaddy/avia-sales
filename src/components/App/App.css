@@ -38,3 +38,7 @@ label, button {
 button {
   text-transform: uppercase;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+}

@@ -1,27 +1,27 @@
 import React from 'react';
 import Ticket from "../Ticket";
+import { actionShowMoreTickets } from "../../redux/store/actionCreators";
 import classes from './Tabs.module.scss';
 import { connect } from "react-redux";
-// import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 import { v4 } from 'uuid';
 
-const Tabs = ({ state }) => {
+const Tabs = ({ state, dispatch }) => {
 
   const filterTickets = (state) => {
-    const result = state.allTickets.filter(ticket => {
-      const stops = ticket.segments[0].stops.length;
-      if(stops === 0 && state.filter.transfer_0) return ticket;
-      if(stops === 1 && state.filter.transfer_1) return ticket;
-      if(stops === 2 && state.filter.transfer_2) return ticket;
-      if(stops === 3 && state.filter.transfer_3) return ticket;
+    const result = state.tickets.allTickets.filter(ticket => {
+      const numberOfStops = ticket.segments[0].stops.length;
+      if(numberOfStops === 0 && state.filter.no_stops) return ticket;
+      if(numberOfStops === 1 && state.filter.one_stop) return ticket;
+      if(numberOfStops === 2 && state.filter.two_stops) return ticket;
+      if(numberOfStops === 3 && state.filter.three_stops) return ticket;
     });
     return result;
   };
 
 
-  const getFirstFiveTickets = (sorted)=> {
+  const ticketsToShow = (sorted, showMore = 0)=> {
     let res = [];
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < state.ticketsToShow; i++) {
       if(sorted[i]) {
         res.push(sorted[i])
       } else {
@@ -31,11 +31,17 @@ const Tabs = ({ state }) => {
     return res;
   };
 
+  const showMoreTicketsButton = () => {
+    let res = false;
+     for (let key in state.filter)  {
+       if(state.filter[key] === true) res = true;
+    };
+     return res;
+  };
+
   const sortedView = filterTickets(state);
 
-
   const ticketsView = (sortedView) => {
-    console.log(sortedView[0]);
     const res = sortedView.map((ticket) => {
       const stops = ticket.segments[0].stops.length;
       return(
@@ -45,8 +51,9 @@ const Tabs = ({ state }) => {
         />
       );
     })
-    return getFirstFiveTickets(res);
+    return ticketsToShow(res);
   };
+
 
   return (
     <div className={classes['tab']}>
@@ -56,12 +63,23 @@ const Tabs = ({ state }) => {
         {/*<button className={classes['btn']}>Оптимальный</button>*/}
       </div>
       {ticketsView(sortedView)}
+      {
+        showMoreTicketsButton()  &&
+        <button className={classes['btn__more-tickets']} onClick={() => {
+        dispatch(actionShowMoreTickets(5));
+      }
+      }>More Tickets</button>
+      }
     </div>
   );
+};
+
+const mapDispatchToProps = dispatch => {
+  return {dispatch};
 };
 
 const mapStateToProps = state => {
   return {state}
 };
 
-export default connect(mapStateToProps)(Tabs);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
